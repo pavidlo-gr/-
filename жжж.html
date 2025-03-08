@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сюрприз</title>
+    <style>
+        /* Прячем кнопку */
+        #playButton {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <audio id="myAudio" loop>
+        <source src="POU_ESTOURADO.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудиотег.
+    </audio>
+
+    <button id="playButton"></button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let audio = document.getElementById("myAudio");
+            let playButton = document.getElementById("playButton");
+
+            function startAudio() {
+                audio.play().then(() => {
+                    playButton.remove();
+                }).catch(error => console.log("Ошибка при запуске аудио:", error));
+            }
+
+            playButton.addEventListener("click", startAudio);
+            playButton.addEventListener("touchstart", startAudio);
+        });
+    </script>
+</body>
+</html>
